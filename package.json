@@ -31,7 +31,7 @@
     "zuul": "^3.7.2"
   },
   "dependencies": {
-    "randombytes": "^2.0.5",
+    "randombytes": "git+https://github.com/dkostenevich/randombytes.git",
     "safe-buffer": "^5.1.0"
   }
 }

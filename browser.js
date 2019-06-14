@@ -1,8 +1,5 @@
 'use strict'
 
-function oldBrowser () {
-  throw new Error('secure random number generation not supported by this browser\nuse chrome, FireFox or Internet Explorer 11')
-}
 var safeBuffer = require('safe-buffer')
 var randombytes = require('randombytes')
 var Buffer = safeBuffer.Buffer
@@ -36,13 +33,7 @@ function assertSize (size, offset, length) {
     throw new RangeError('buffer too small')
   }
 }
-if ((crypto && crypto.getRandomValues) || !process.browser) {
-  exports.randomFill = randomFill
-  exports.randomFillSync = randomFillSync
-} else {
-  exports.randomFill = oldBrowser
-  exports.randomFillSync = oldBrowser
-}
+
 function randomFill (buf, offset, size, cb) {
   if (!Buffer.isBuffer(buf) && !(buf instanceof global.Uint8Array)) {
     throw new TypeError('"buf" argument must be a Buffer or Uint8Array')
@@ -106,3 +97,6 @@ function randomFillSync (buf, offset, size) {
 
   return actualFill(buf, offset, size)
 }
+
+exports.randomFill = randomFill;
+exports.randomFillSync = randomFillSync;
